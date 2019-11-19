@@ -2,8 +2,6 @@ from captcha.image import ImageCaptcha
 import random
 import time
 
-img = ImageCaptcha(width=120, height=60)
-
 
 def create_random_int_data(data_count):
     '''
@@ -40,19 +38,24 @@ def create_random_int_data(data_count):
     return random_data
 
 
-def create_image(random_data, image_file_path):
+def create_image(random_data, image_file_path, image_width, image_height):
     '''
     This function is to create a image
     :param random_data:4 int str data
     :param image_file_path: save image path
     :return:data length to create
     '''
+    # default
+    if image_width == 0 and image_height == 0:
+        img = ImageCaptcha(width=120, height=60)
+    else:
+        img = ImageCaptcha(width=image_width, height=image_height)
     print('Image Create is start!')
     for data in range(len(random_data)):
         img.create_captcha_image(random_data[data], color=random_color(), background='white').save(
             image_file_path + '{}.png'.format(random_data[data]))
         time.sleep(0.2)
-        print('No.{}->{}.png'.format(data+1, random_data[data]))
+        print('No.{}->{}.png'.format(data + 1, random_data[data]))
     return print('+Complete to create {} images+'.format(len(random_data)))
 
 
