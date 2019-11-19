@@ -48,11 +48,12 @@ def create_image(random_data, image_file_path):
     :return:data length to create
     '''
     print('Image Create is start!')
-    for data in random_data:
-        img.create_captcha_image(data, color=random_color(), background='white').save(
-            image_file_path + '{}.png'.format(data))
+    for data in range(len(random_data)):
+        img.create_captcha_image(random_data[data], color=random_color(), background='white').save(
+            image_file_path + '{}.png'.format(random_data[data]))
         time.sleep(0.2)
-    return print('+Complete {}Images+'.format(len(random_data)))
+        print('No.{}->{}.png'.format(data+1, random_data[data]))
+    return print('+Complete to create {} images+'.format(len(random_data)))
 
 
 def random_color():
