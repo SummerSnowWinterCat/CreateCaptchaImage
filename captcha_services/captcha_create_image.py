@@ -3,7 +3,7 @@ import random
 import time
 
 
-def create_random_int_data(data_count):
+def create_random_int_data(data_count, data_length):
     '''
     This is a function to create random int data
     :param data_count:create 0~data_count images
@@ -13,11 +13,10 @@ def create_random_int_data(data_count):
     random_data = []
     for create_number in range(data_count):
         max_length = len(random_data)
-        random_int_01 = random.randint(0, 9)
-        random_int_02 = random.randint(0, 9)
-        random_int_03 = random.randint(0, 9)
-        random_int_04 = random.randint(0, 9)
-        random_str = str(random_int_01) + str(random_int_02) + str(random_int_03) + str(random_int_04)
+        random_str = ''
+        for random_length in range(data_length):
+            random_str += str(random.randint(0, 9))
+        # random_str = str(random_int_01) + str(random_int_02) + str(random_int_03) + str(random_int_04)
         if len(random_data) == 0:
             random_data.append(random_str)
         else:
@@ -53,7 +52,7 @@ def create_image(random_data, image_file_path, image_width, image_height):
     print('Image Create is start!')
     for data in range(len(random_data)):
         img.create_captcha_image(random_data[data], color=random_color(), background='white').save(
-            image_file_path + '{}.png'.format(random_data[data]))
+            image_file_path + '/{}.png'.format(random_data[data]))
         time.sleep(0.2)
         print('No.{}->{}.png'.format(data + 1, random_data[data]))
     return print('+Complete to create {} images+'.format(len(random_data)))
